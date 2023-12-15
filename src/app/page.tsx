@@ -1,12 +1,16 @@
-import Image from 'next/image'
+import { Metadata } from "next"
+import Form from "./components/Form"
+
+export const metadata: Metadata = {
+  title: "CV - Generator"
+}
+
 
 export default function Home()
 {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>
-        CV - APP
-      </h1>
+    <main className="h-screen">
+      <Form />
     </main>
   )
 }
