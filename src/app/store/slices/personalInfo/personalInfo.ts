@@ -10,7 +10,6 @@ type PersonalInfo = {
 export interface PersonalInfoSlice {
     personalInfo: PersonalInfo;
     setPersonalInfo(info: Partial<PersonalInfo>): void;
-    clearInfo(): void;
 }
 
 const initialState = {
@@ -27,14 +26,14 @@ export const createPersonalInfo: StateCreator<PersonalInfoSlice> = (set) => ({
             personalInfo: { ...state.personalInfo, ...info },
         }));
     },
-    clearInfo() {
-        set(() => ({
-            personalInfo: {
-                fullname: "",
-                email: "",
-                phoneNumber: "",
-                address: "",
-            },
-        }));
-    },
+    // clearInfo() {
+    //     set(() => ({
+    //         personalInfo: {
+    //             fullname: "",
+    //             email: "",
+    //             phoneNumber: "",
+    //             address: "",
+    //         },
+    //     }));
+    // },
 });

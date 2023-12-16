@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import Form from "./components/Form"
+import FormComplete from "./components/FormComplete"
 
 export const metadata: Metadata = {
   title: "CV - Generator"
@@ -10,7 +10,7 @@ export default function Home()
 {
   return (
     <main className="h-screen">
-      <Form />
+      <FormComplete />
     </main>
   )
 }
