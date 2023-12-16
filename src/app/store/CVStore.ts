@@ -1,5 +1,9 @@
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
+import {
+    ExperiencesInfoSlice,
+    createExperiencesInfo,
+} from "./slices/experienciesInfo/experienciesInfo";
 import {
     EducationInfoSlice,
     createEducationInfo,
@@ -14,11 +18,20 @@ interface ClearInformacion {
 }
 
 export const useCVInfo = create<
-    PersonalInfoSlice & EducationInfoSlice & ClearInformacion
+    PersonalInfoSlice &
+        EducationInfoSlice &
+        ClearInformacion &
+        ExperiencesInfoSlice
 >()(
-    devtools((...a) => ({
-        ...createPersonalInfo(...a),
-        ...createEducationInfo(...a),
-        clear() {},
-    }))
+    devtools(
+        persist(
+            (...a) => ({
+                ...createPersonalInfo(...a),
+                ...createEducationInfo(...a),
+                ...createExperiencesInfo(...a),
+                clear() {},
+            }),
+            { name: "CV" }
+        )
+    )
 );

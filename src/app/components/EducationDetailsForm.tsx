@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { useCVInfo } from "../store/CVStore"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -18,7 +17,6 @@ export default function EducationDetailsForm()
   const handleClick = () =>
   {
     setCreateForm(true)
-    console.log('Abriendo Formulario')
   }
   const addInfo = () =>
   {

@@ -2,6 +2,7 @@
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import PersonalDetailsForm from "./PersonalDetailsForm";
 import EducationDetailsForm from "./EducationDetailsForm";
+import ExperiencesDetailsForm from "./ExperiencesDetailsForm";
 export default function FormComplete()
 {
   // const clearInfo = useCVInfo(state => state.clear)
@@ -21,6 +22,12 @@ export default function FormComplete()
           <AccordionTrigger>Education Info</AccordionTrigger>
           <AccordionContent>
             <EducationDetailsForm />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-3">
+          <AccordionTrigger>Experiences</AccordionTrigger>
+          <AccordionContent>
+            <ExperiencesDetailsForm />
           </AccordionContent>
         </AccordionItem>
       </Accordion>
