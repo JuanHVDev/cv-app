@@ -1,117 +1,71 @@
 "use client"
 import React from 'react'
 import { useCVInfo } from '../store/CVStore'
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-
-const styleSheet = StyleSheet.create({
-  section: {
-    backgroundColor: "rgb(30 58 138)",
-    height: 160,
-    textAlign: "center",
-    padding: 16
-  },
-  title: {
-    textTransform: 'capitalize',
-    fontSize: 20,
-    margin: 8,
-    fontWeight: 700
-  },
-  sectionPersonal: {
-    display: 'flex',
-    gap: 20,
-    justifyContent: 'center',
-    padding: 8,
-    fontSize: 20
-  }
-  ,
-  sectionTitle: {
-    backgroundColor: "rgb(212 212 216)",
-    margin: 16,
-    textAlign: 'center',
-    textTransform: 'capitalize',
-    fontSize: 24,
-    padding: 8,
-    color: "hsl(var(--primary))",
-    fontWeight: 600
-  },
-  sectionDiv: {
-    color: "black",
-    display: "flex",
-    gap: 20,
-    justifyContent: 'center',
-    paddingLeft: "1.5rem"/* 24px */,
-    paddingRight: "1.5rem",
-    marginTop: "1rem"/* 16px */,
-    marginBottom: "1rem"
-  }
-})
 
 export const PrevCV = () =>
 {
-  const { fullname, email, address, phoneNumber } = useCVInfo((state) => state.personalInfo)
+  const { fullname, email, address, phoneNumber } = useCVInfo(state => state.personalInfo)
   const educationInfo = useCVInfo(state => state.educationInfo)
   const experienceInfo = useCVInfo(state => state.experienceInfo)
   return (
-    <Document>
-      <Page size={'A4'}>
-        <View style={styleSheet.section}>
-          <Text style={styleSheet.title}>{fullname}</Text>
-          <View style={styleSheet.sectionPersonal}>
-            <Text>{email}</Text>
-            <Text>{phoneNumber}</Text>
-          </View>
-          <Text style={{ padding: 8 }}>
-            {address}
-          </Text>
-        </View>
-        <View>
-          <View style={styleSheet.sectionTitle}>
-            <Text>Education</Text>
-          </View>
-          <View>
-            {educationInfo.map((education) => (
-              <View style={styleSheet.sectionDiv} key={education.id}>
-                <View>
-                  <Text>
-                    {education.startDate} - {education.endDate}
-                  </Text>
-                </View>
-                <View>
-                  <Text style={{ fontWeight: 'bold' }}>
-                    {education.school}
-                  </Text>
-                  <Text>
-                    {education.degree}
-                  </Text>
-                </View>
-              </View>
-            ))}
-          </View>
-        </View>
-        <View>
-          <View style={styleSheet.sectionTitle}>
-            <h1>Experiences</h1>
-          </View>
-          <View>
-            {experienceInfo.map((experience) => (
-              <View style={styleSheet.sectionDiv} key={experience.id}>
-                <View>
-                  <Text>{experience.startDate} - {experience.endDate}</Text>
-                </View>
-                <View>
-                  <Text style={{ fontWeight: 'bold' }}>
-                    {experience.company}
-                  </Text>
-                  <Text>
-                    {experience.position}
-                  </Text>
-                  {experience.description && <Text>{experience.description}</Text>}
-                </View>
-              </View>
-            ))}
-          </View>
-        </View>
-      </Page>
-    </Document>
+    <div>
+      <div className='bg-blue-900 h-40 text-center p-4'>
+        <h1 className='capitalize text-xl m-2 font-bold'>{fullname}</h1>
+        <div className='flex gap-5 justify-center p-2 text-xl'>
+          <p>{email}</p>
+          <p>{phoneNumber}</p>
+        </div>
+        <p className='p-2'>
+          {address}
+        </p>
+      </div>
+      <div>
+        <div className='bg-zinc-300 m-4 text-center capitalize text-2xl p-2 text-primary font-semibold'>
+          <h1>Education</h1>
+        </div>
+        <div>
+          {educationInfo.map((education) => (
+            <div className='text-black flex gap-5 justify-center md:text-xl px-6 my-4' key={education.id}>
+              <div>
+                <p>
+                  {education.startDate} - {education.endDate}
+                </p>
+              </div>
+              <div>
+                <p className='font-bold'>
+                  {education.school}
+                </p>
+                <p>
+                  {education.degree}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <div className='bg-zinc-300 m-4 text-center capitalize text-2xl p-2 text-primary font-semibold'>
+          <h1>Experiences</h1>
+        </div>
+        <div>
+          {experienceInfo.map((experience) => (
+            <div className='text-black flex gap-5 justify-center md:text-xl px-6 my-4' key={experience.id}>
+              <div>
+                <p>{experience.startDate} - {experience.endDate}</p>
+              </div>
+              <div>
+                <p className='font-bold'>
+                  {experience.company}
+                </p>
+                <p>
+                  {experience.position}
+                </p>
+                {experience.description && <p>{experience.description}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }
