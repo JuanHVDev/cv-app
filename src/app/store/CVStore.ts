@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
+
 import {
     ExperiencesInfoSlice,
     createExperiencesInfo,
@@ -12,26 +13,37 @@ import {
     PersonalInfoSlice,
     createPersonalInfo,
 } from "./slices/personalInfo/personalInfo";
+import { StateCreator } from "zustand";
 
-interface ClearInformacion {
-    clear(): void;
+export interface LoadExampleSlice {
+    [x: string]: any;
+    clear: () => void;
+    loadExample: () => void;
 }
+
+const createLoadExample: StateCreator<LoadExampleSlice> = (set, get) => ({
+    clear: () => {
+        get().clearInfoExperience();
+        get().clearInfoPersonal();
+        get().clearInfoEducation();
+    },
+    loadExample: () => {
+        get().getExampleExperiences();
+        get().getExamplePersonalInfo();
+        get().getExampleEducation();
+    },
+});
 
 export const useCVInfo = create<
     PersonalInfoSlice &
         EducationInfoSlice &
-        ClearInformacion &
-        ExperiencesInfoSlice
+        ExperiencesInfoSlice &
+        LoadExampleSlice
 >()(
-    devtools(
-        persist(
-            (...a) => ({
-                ...createPersonalInfo(...a),
-                ...createEducationInfo(...a),
-                ...createExperiencesInfo(...a),
-                clear() {},
-            }),
-            { name: "CV" }
-        )
-    )
+    devtools((...a) => ({
+        ...createPersonalInfo(...a),
+        ...createEducationInfo(...a),
+        ...createExperiencesInfo(...a),
+        ...createLoadExample(...a),
+    }))
 );

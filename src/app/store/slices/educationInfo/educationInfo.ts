@@ -17,18 +17,23 @@ export interface EducationInfoSlice {
     setEducationInfo(educationInfo: EducationInfo[]): void;
     createForm: boolean;
     setCreateForm(state: boolean): void;
+    getExampleEducation(): void;
+    clearInfoEducation(): void;
 }
 
 const initialState = {
     id: uuidv4(),
-    school: "Escuela Primaria Reforma Educativo Liberal",
-    degree: "Primaria",
-    startDate: "Agosto-2007",
-    endDate: "Agosto-2013",
-    location: "Cuernavaca, Morelos",
+    school: "",
+    degree: "",
+    startDate: "",
+    endDate: "",
+    location: "",
 };
 
-export const createEducationInfo: StateCreator<EducationInfoSlice> = (set) => ({
+export const createEducationInfo: StateCreator<EducationInfoSlice> = (
+    set,
+    get
+) => ({
     education: initialState,
     educationInfo: [],
     setEducation(info) {
@@ -41,6 +46,7 @@ export const createEducationInfo: StateCreator<EducationInfoSlice> = (set) => ({
     },
     addEducation(info) {
         if (!info.id) info.id = uuidv4();
+
         set((state) => ({
             educationInfo: [...state.educationInfo, info],
         }));
@@ -51,5 +57,22 @@ export const createEducationInfo: StateCreator<EducationInfoSlice> = (set) => ({
     createForm: false,
     setCreateForm(state) {
         set({ createForm: state });
+    },
+    getExampleEducation() {
+        set((state) => ({
+            educationInfo: [
+                {
+                    id: uuidv4(),
+                    school: "UNAM",
+                    degree: "Lic. en Medicina",
+                    startDate: "2018",
+                    endDate: "2022",
+                    location: "Ciudad de México",
+                },
+            ],
+        }));
+    },
+    clearInfoEducation() {
+        set((state) => ({ educationInfo: [] }));
     },
 });

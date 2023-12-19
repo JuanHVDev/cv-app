@@ -15,34 +15,43 @@ export interface ExperiencesInfoSlice {
     experienceInfo: ExperiencesInfo[];
     setExperience(info: Partial<ExperiencesInfo>): void;
     addExperience(info: ExperiencesInfo): void;
-    setExperienceInfo(educationInfo: ExperiencesInfo[]): void;
+    setExperienceInfo(experienceInfo: ExperiencesInfo[]): void;
     createForm: boolean;
     setCreateForm(state: boolean): void;
+    getExampleExperiences(): void;
+    clearInfoExperience(): void;
 }
 
 const initialState = {
     id: uuidv4(),
-    company: "Google",
-    position: "Programmer Junnior",
-    startDate: "Agosto-2020",
-    endDate: "present",
-    location: "Ciudad de México, Mx",
+    company: "",
+    position: "",
+    startDate: "",
+    endDate: "",
+    location: "",
     description: "",
 };
 
 export const createExperiencesInfo: StateCreator<ExperiencesInfoSlice> = (
-    set
+    set,
+    get
 ) => ({
     experience: initialState,
     experienceInfo: [],
-    addExperience(info) {
-        if (!info.id) info.id = uuidv4();
-        set((state) => ({
-            experienceInfo: [...state.experienceInfo, info],
-        }));
-    },
+
     setExperience(info) {
         set((state) => ({ experience: { ...state.experience, ...info } }));
+    },
+    addExperience(info) {
+        if (!info.id) info.id = uuidv4();
+
+        if (
+            get().experienceInfo.filter(
+                (experience) => experience.id === info.id
+            )
+        )
+            console.log("Está");
+        set((state) => ({ experienceInfo: [...state.experienceInfo, info] }));
     },
     setExperienceInfo(experience) {
         set({ experienceInfo: experience });
@@ -50,5 +59,24 @@ export const createExperiencesInfo: StateCreator<ExperiencesInfoSlice> = (
     createForm: false,
     setCreateForm(state) {
         set({ createForm: state });
+    },
+    getExampleExperiences() {
+        set((state) => ({
+            experienceInfo: [
+                {
+                    id: uuidv4(),
+                    company: "Google",
+                    position: "Pasante",
+                    startDate: "Julio/2018",
+                    endDate: "Julio/2019",
+                    location: "Ciudad de México",
+                    description:
+                        "Diseñaba y realizaba prototipos de las interfaces",
+                },
+            ],
+        }));
+    },
+    clearInfoExperience() {
+        set((state) => ({ experienceInfo: [] }));
     },
 });

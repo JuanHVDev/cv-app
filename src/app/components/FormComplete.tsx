@@ -1,16 +1,14 @@
-
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import PersonalDetailsForm from "./PersonalDetailsForm";
 import EducationDetailsForm from "./EducationDetailsForm";
 import ExperiencesDetailsForm from "./ExperiencesDetailsForm";
+import Buttons from "./Buttons";
 export default function FormComplete()
 {
-  // const clearInfo = useCVInfo(state => state.clear)
+
   return (
     <div>
-      {/* <Button className='p-4' onClick={() => clearInfo()}>
-        Clear all information
-      </Button> */}
+      <Buttons />
       <Accordion type="single" collapsible className="text-2xl flex flex-col gap-5 p-4 w-96">
         <AccordionItem value="item-1">
           <AccordionTrigger>Personal Details</AccordionTrigger>

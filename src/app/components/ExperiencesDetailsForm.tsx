@@ -18,7 +18,7 @@ export default function ExperiencesDetailsForm()
 
   const addInfo = () =>
   {
-    addExperience({ company, location, position, startDate, description, endDate, id })
+    addExperience({ company, location, position, startDate, description, endDate })
     setCreateForm(false)
   }
 
@@ -32,7 +32,7 @@ export default function ExperiencesDetailsForm()
   const openForm = (id: string) =>
   {
     setCreateForm(true)
-    const newInfo = experienceInfo.find((experience) => education.id === id)
+    const newInfo = experienceInfo.find((experience) => experience.id === id)
     setExperience({ ...newInfo })
   }
 
@@ -72,7 +72,7 @@ export default function ExperiencesDetailsForm()
           </div>
           <div>
             <Label htmlFor="description">Description</Label>
-            <Textarea placeholder="description" id="description" value={description} onChange={(e) => setExperience({ description: e.target.value })} />
+            <Textarea placeholder="description" id="description" defaultValue={description} onChange={(e) => setExperience({ description: e.target.value })} />
           </div>
           <Button onClick={() => setCreateForm(false)}>Cancel</Button>
           <Button onClick={addInfo}>Save</Button>
