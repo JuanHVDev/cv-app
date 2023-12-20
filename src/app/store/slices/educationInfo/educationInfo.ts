@@ -1,7 +1,7 @@
 import { StateCreator } from "zustand";
 import { v4 as uuidv4 } from "uuid";
 type EducationInfo = {
-    id?: string;
+    id?: string | undefined;
     school: string;
     degree: string;
     startDate: string;

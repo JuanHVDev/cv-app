@@ -22,14 +22,14 @@ export default function ExperiencesDetailsForm()
     setCreateForm(false)
   }
 
-  const deleteItem = (id: string) =>
+  const deleteItem = (id: string = "") =>
   {
     const newInfo = experienceInfo.filter(experience => experience.id !== id)
     setExperienceInfo(newInfo)
     setCreateForm(false)
   }
 
-  const openForm = (id: string) =>
+  const openForm = (id: string = "") =>
   {
     setCreateForm(true)
     const newInfo = experienceInfo.find((experience) => experience.id === id)
@@ -41,7 +41,7 @@ export default function ExperiencesDetailsForm()
       <div>
         {
           experienceInfo.map((experience) => (
-            <Button onClick={() => openForm(experience.id)}>
+            <Button onClick={() => openForm(experience.id)} key={experience.id}>
               {experience.company}
             </Button>
           ))

@@ -24,13 +24,13 @@ export default function EducationDetailsForm()
     setCreateForm(false)
   }
 
-  const openForm = (id: string) =>
+  const openForm = (id: string = "") =>
   {
     setCreateForm(true)
     const newInfo = educationInfo.find((education) => education.id === id)
     setEducation({ ...newInfo })
   }
-  const deleteItem = (id: string) =>
+  const deleteItem = (id: string = "") =>
   {
     const newInfo = educationInfo.filter(educacion => educacion.id !== id)
     setEducationInfo(newInfo)
@@ -41,7 +41,7 @@ export default function EducationDetailsForm()
     <div>
       <div>
         {educationInfo.map((education) => (
-          <Button onClick={() => openForm(education.id)}>
+          <Button onClick={() => openForm(education.id)} key={education.id}>
             {education.school}
           </Button>
         ))}

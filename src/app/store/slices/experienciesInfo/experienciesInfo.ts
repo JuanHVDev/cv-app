@@ -1,7 +1,7 @@
 import { StateCreator } from "zustand";
 import { v4 as uuidv4 } from "uuid";
 type ExperiencesInfo = {
-    id?: string;
+    id?: string | undefined;
     company: string;
     position: string;
     startDate: string;
